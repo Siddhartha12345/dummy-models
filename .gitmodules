@@ -1,6 +1,6 @@
-[submodule "user-models/shared-kernel"]
+[submodule "user-models"]
 	path = user-models/shared-kernel
 	url = https://github.com/Siddhartha12345/dummy-user-schema.git
-[submodule "employee-models/shared-kernel"]
+[submodule "employee-models"]
 	path = employee-models/shared-kernel
 	url = https://github.com/Siddhartha12345/dummy-employee-schema.git

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.4.4</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <artifactId>employee-models</artifactId>
+    <name>employee-models</name>
+
+    <properties>
+        <pojogen.generated.directory>src/java/main</pojogen.generated.directory>
+        <pojogen.skip>true</pojogen.skip>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.12.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>add-source-directory</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <sources>
+                                <source>${project.basedir}/src/main/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jsonschema2pojo</groupId>
+                <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <id>generate-pojos</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${pojogen.skip}</skip>
+                            <sourceDirectory>${basedir}/shared-kernel</sourceDirectory>
+                            <targetPackage>com.domain.employee.schema</targetPackage>
+                            <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+                            <includeAdditionalProperties>false</includeAdditionalProperties>
+                            <annotationStyle>jackson</annotationStyle>
+                            <includeJsr303Annotations>true</includeJsr303Annotations>
+                            <dateType>java.time.LocalDate</dateType>
+                            <sourceSortOrder>SUBDIRS_FIRST</sourceSortOrder>
+                            <removeOldOutput>true</removeOldOutput>
+                            <includeGeneratedAnnotation>false</includeGeneratedAnnotation>
+                            <useJakartaValidation>true</useJakartaValidation>
+                            <includes>
+                                <include>**/*.json</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
