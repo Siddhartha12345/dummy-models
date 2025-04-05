@@ -1,0 +1,3 @@
+[submodule "user-models/shared-kernel"]
+	path = user-models/shared-kernel
+	url = https://github.com/Siddhartha12345/dummy-user-schema.git
